@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LiftMaster / Chamberlain Error 1-5 Fix: 3D-Printable Motor Coupler</title>
+<meta name="description" content="A 3D-printable replacement for the stripped white motor gear that drives the travel module on a LiftMaster 8550W garage door opener (error code 1-5).">
+<style>
+  :root {
+    --bg: #fdfdfc; --fg: #1d1d1f; --muted: #5b5b60; --line: #e2e2e5;
+    --accent: #c2410c; --card: #f4f4f5; --warn-bg: #fff7ed; --warn-line: #fdba74;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #141416; --fg: #ececee; --muted: #a1a1a8; --line: #2e2e33;
+      --accent: #fb923c; --card: #1e1e22; --warn-bg: #2a1a0e; --warn-line: #9a3412;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--fg);
+    font: 17px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  main { max-width: 760px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+  h1 { font-size: 1.9rem; line-height: 1.25; margin: 0 0 .5rem; }
+  h2 { font-size: 1.35rem; margin: 2.5rem 0 .75rem; padding-bottom: .3rem; border-bottom: 1px solid var(--line); }
+  h3 { font-size: 1.1rem; margin: 1.5rem 0 .5rem; }
+  .sub { color: var(--muted); margin: 0 0 1.5rem; }
+  a { color: var(--accent); }
+  code { font: .9em ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--card); padding: .1em .35em; border-radius: 4px; }
+  .warn {
+    background: var(--warn-bg); border: 1px solid var(--warn-line); border-radius: 8px;
+    padding: 1rem 1.25rem; margin: 1.5rem 0;
+  }
+  .warn strong:first-child { display: block; margin-bottom: .25rem; }
+  .photos { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
+  @media (max-width: 560px) { .photos { grid-template-columns: 1fr; } }
+  figure { margin: 0; }
+  figure img { width: 100%; height: auto; display: block; border-radius: 8px; border: 1px solid var(--line); }
+  figcaption { font-size: .9rem; color: var(--muted); margin-top: .4rem; }
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: .95rem; }
+  th, td { text-align: left; padding: .55rem .6rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-weight: 600; }
+  .dl { white-space: nowrap; font-weight: 600; }
+  footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--line); font-size: .85rem; color: var(--muted); }
+</style>
+</head>
+<body>
+<main>
+
+<h1>LiftMaster 8550W Error 1-5: 3D-Printable Motor Coupler</h1>
+<p class="sub">A printed replacement for the stripped white gear that drives the travel module. Model 8550W-267, FCC ID HBW1D8169-1, part number 001D8363.</p>
+
+<div class="warn">
+  <strong>Read this first</strong>
+  This is a personal DIY repair, shared for information only. It is not a tested or certified product. Garage door openers and doors can cause serious injury, death, or property damage. If you use anything on this page, <strong>you do so entirely at your own risk</strong>. See the <a href="#disclaimer">full disclaimer</a> below.
+</div>
+
+<h2>Symptoms</h2>
+<ul>
+  <li>The opener moves the door a few inches, then stops and reverses.</li>
+  <li>The travel (limit) buttons flash an error: <strong>1 flash on the up arrow, 5 on the down arrow</strong> (code 1-5).</li>
+  <li>With the opener disconnected, the door moves freely by hand. Tracks, rollers, and the spring are fine.</li>
+  <li>Trying to reset the travel limits only lets the door move a few seconds (about 6 inches) at a time.</li>
+</ul>
+
+<h2>What was actually wrong</h2>
+<p>With the travel module removed, the problem was clear. The travel module was fine, but the <strong>white plastic gear on the end of the motor</strong> had its teeth stripped off.</p>
+<p>That gear only spins the travel module, the sensor that tells the opener the motor is turning. With the gear stripped, the motor runs but the opener can't tell, so it shuts off after a few inches and throws 1-5.</p>
+<p>As far as I could find, LiftMaster doesn't sell that gear on its own. The official fix is the whole motor and travel module kit (041-0236-000), which costs around $300, close to the price of a new opener. So I designed a replacement.</p>
+
+<div class="photos">
+  <figure>
+    <img src="images/before.jpg" width="1200" height="1600" loading="lazy"
+         alt="Opener with the cover off and the travel module hanging loose, showing the white plastic gear on the motor with its teeth stripped">
+    <figcaption>Before: the travel module is removed, and the white gear in the center of the motor is stripped.</figcaption>
+  </figure>
+  <figure>
+    <img src="images/after.jpg" width="1200" height="1600" loading="lazy"
+         alt="The same opener with an orange 3D-printed coupler with four slots screwed onto the center of the motor">
+    <figcaption>After: the orange printed coupler is screwed onto the motor, ready for the travel module.</figcaption>
+  </figure>
+</div>
+
+<h2>Files</h2>
+<table>
+  <thead><tr><th>File</th><th>What it is</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><a class="dl" href="motor_coupler_short.scad" download>motor_coupler_short.scad</a></td>
+      <td>Parametric OpenSCAD source: the 4 mm tall version with anti-spin pin holes. Edit this to adjust the part for your unit.</td>
+    </tr>
+    <tr>
+      <td><a class="dl" href="motor_coupler_short_pins.stl" download>motor_coupler_short_pins.stl</a></td>
+      <td>Ready-to-slice model exported from the SCAD file with the values shown below.</td>
+    </tr>
+    <tr>
+      <td><a class="dl" href="motor_coupler_short_pins_0.15mm_PETG_MK3S_8m.gcode" download>motor_coupler_short_pins_0.15mm_PETG_MK3S_8m.gcode</a></td>
+      <td>The G-code I printed with. <strong>It only works on a Prusa MK3S</strong> with a 0.4 mm nozzle and PETG (0.15 mm layers, 100% infill, about 8 minutes). For any other printer, slice the STL yourself.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>The part</h2>
+<p>It's a small disc that screws onto the end of the motor. Four slots on top take the four lugs on the travel module. A center M3 screw holds it down, and two pins keep it from spinning loose.</p>
+<ul>
+  <li>Outside diameter: 14.5 mm, height: 4 mm</li>
+  <li>4 radial slots, 3.7 mm wide, for the travel module's 3 mm wide, 3 mm tall lugs (<code>slot_clear = 0.7</code>)</li>
+  <li>Center hole for an M3 screw, with a 6.2 mm recess so the screw head sits level with the slot floor</li>
+  <li>Two 2 mm pin holes, 180&deg; apart, 5 mm from center, under the solid sections between the slots</li>
+</ul>
+<p>My unit may not match yours. Measure your motor and travel module before printing, and adjust the values at the top of the SCAD file if needed.</p>
+
+<h2>Printing</h2>
+<ul>
+  <li>Material: PETG or nylon. PLA can soften in a hot garage.</li>
+  <li>100% infill</li>
+  <li>Print with the slot side up</li>
+  <li>If the fit is off, change <code>slot_clear</code> in the SCAD file (higher is looser)</li>
+</ul>
+<p>To make your own STL: open the <code>.scad</code> file in <a href="https://openscad.org/">OpenSCAD</a> (free), change any values you need, press F6 to render, then export the STL.</p>
+
+<h2>Installing</h2>
+<div class="warn">
+  <strong>Unplug the opener and remove the battery backup before working on it.</strong>
+  Make sure the door is closed or secured so it can't move while you work.
+</div>
+<ol>
+  <li>Remove the light lens and cover, then remove the travel module.</li>
+  <li>Remove what's left of the broken gear and clean out any bits of stripped plastic.</li>
+  <li>Screw the new coupler onto the end of the motor with an M3 screw and blue threadlocker.</li>
+</ol>
+
+<h3>Adding the anti-spin pins</h3>
+<p>My first install spun loose with just the screw, because the motor runs in both directions. Two pins fixed it.</p>
+<ol>
+  <li>With the coupler screwed on, use its pin holes as a drill guide and drill about 4 mm deep. <strong>The pins must go into the part that rotates with the motor, not the stationary motor housing,</strong> or you'll lock up the motor.</li>
+  <li>Use pins about 8 mm long. 2 mm or 5/64" dowel or roll pins, the cut shank of a 5/64" drill bit, or a 14-gauge wire nail all work.</li>
+  <li>Glue the pins in with epoxy (I used J-B Weld). Make sure they don't stick up above the top of the coupler.</li>
+  <li>Let the epoxy fully cure before running the opener.</li>
+</ol>
+
+<h2>After installing</h2>
+<ol>
+  <li>Put the travel module back on and plug its harness in firmly.</li>
+  <li>Reinstall the battery and the cover.</li>
+  <li>Reset the up and down travel limits.</li>
+  <li>Run the door several times and make sure it stops in the same place every time.</li>
+  <li><strong>Do the safety reverse test:</strong> lay a 2x4 flat on the floor under the door and make sure the door reverses when it touches it. Also check that the safety sensors (photo eyes) stop and reverse the door. <strong>If either test fails, don't use the opener.</strong></li>
+</ol>
+<p>Check the coupler after a couple of weeks for wear or play. It's cheap to print another one.</p>
+
+<h2 id="disclaimer">Disclaimer</h2>
+<p>Everything here, including the design files, STL, G-code, photos, and instructions, is provided <strong>"as is", without warranty of any kind</strong>, express or implied, including but not limited to warranties of merchantability, fitness for a particular purpose, safety, or non-infringement.</p>
+<p>This is not professional advice, and the part has not been tested beyond my own opener. It may not fit, may fail, and may cause the opener or door to behave unsafely. Modifying your opener may void its warranty and any safety certification.</p>
+<p>By using any of this material, you accept full responsibility for the results. In no event shall the author be liable for any injury, death, property damage, or other loss or claim arising from the use or misuse of this information or these files. If you're not comfortable working on a garage door opener, hire a qualified garage door technician.</p>
+<p>This project is not affiliated with, endorsed by, or sponsored by The Chamberlain Group, LiftMaster, or Prusa Research. All product names, model numbers, and trademarks belong to their respective owners and are used only to identify compatible equipment.</p>
+
+<footer>
+  Shared in the hope that it saves someone a $300 repair. Use at your own risk.<br>
+  &copy; 2026 Justin Cooper. Licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> (<a href="LICENSE">LICENSE</a>). Provided as is, without warranty.
+</footer>
+
+</main>
+</body>
+</html>
